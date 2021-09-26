@@ -14,6 +14,19 @@ summary(lm(ground_clearance~mpg,mpg_df)) #summarize linear model
 lm(AWD~mpg,mpg_df)
 summary(lm(AWD~mpg,mpg_df)) #summarize linear model
 
+vlmodel <- lm(vehicle_length~mpg,mpg_df)
+vlyvals <- vlmodel$coefficients['mpg']*mpg_df$mpg +
+vlmodel$coefficients['(Intercept)'] #determine y-axis values from linear model
+vlplt <- ggplot(mpg_df,aes(x=mpg,y=vehicle_length)) #import dataset into ggplot2
+vlplt + geom_point() + geom_line(aes(y=vlyvals), color = "red") #plot scatter and linear model
+
+gcmodel <- lm(ground_clearance~mpg,mpg_df)
+gcyvals <- gcmodel$coefficients['mpg']*mpg_df$mpg +
+  gcmodel$coefficients['(Intercept)'] #determine y-axis values from linear model
+gcplt <- ggplot(mpg_df,aes(x=mpg,y=ground_clearance)) #import dataset into ggplot2
+gcplt + geom_point() + geom_line(aes(y=gcyvals), color = "red") #plot scatter and linear model
+
+
 #Deliverable 2
 suspension_df <- read_csv("Desktop/Vanderbilt_Class/MechaCar_Statistical_Analysis/Suspension_Coil.csv")
 View(suspension_df)
